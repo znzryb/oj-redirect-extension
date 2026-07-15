@@ -1,0 +1,16 @@
+# 参考项目本地 clone，不进版本库
+third-party/
+
+# macOS
+.DS_Store
+
+# 构建产物 / 打包
+*.zip
+*.crx
+*.pem
+dist/
+build/
+
+# 编辑器
+.vscode/
+.idea/

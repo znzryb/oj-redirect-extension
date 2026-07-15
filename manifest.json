@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "OJ Redirect (VJudge / Luogu / clist)",
+  "version": "1.6.0",
+  "description": "在 CodeChef / QOJ / Codeforces 题目页添加跳转按钮：VJudge、Luogu、clist。",
+  "author": "znzryb",
+  "homepage_url": "https://github.com/znzryb/oj-redirect-extension",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.codechef.com/problems/*",
+        "https://qoj.ac/problem/*",
+        "https://qoj.ac/contest/*/problem/*",
+        "https://codeforces.com/contest/*/problem/*",
+        "https://codeforces.com/problemset/problem/*/*",
+        "https://codeforces.com/gym/*/problem/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [
+    "https://www.luogu.com.cn/*",
+    "https://codeforces.com/*"
+  ]
+}
