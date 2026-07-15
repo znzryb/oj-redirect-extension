@@ -21,7 +21,7 @@
 
   const COLOR = {
     vjudge: '#28a745',
-    luogu:  '#e74c3c',
+    luogu:  '#28a745',
     clist:  '#4a90e2',
     grayed: '#6c757d',
   };
@@ -36,12 +36,16 @@
       top,
       backgroundColor: grayed ? COLOR.grayed : color,
       opacity: grayed ? '0.6' : '1',
+      cursor: grayed ? 'not-allowed' : 'pointer',
     });
-    if (!grayed) {
+    if (grayed) {
+      btn.title = '目标 OJ 上未找到该题目';
+      btn.setAttribute('aria-disabled', 'true');
+    } else {
       btn.addEventListener('mouseenter', () => (btn.style.opacity = '0.9'));
       btn.addEventListener('mouseleave', () => (btn.style.opacity = '1'));
+      btn.addEventListener('click', () => window.open(url, '_blank'));
     }
-    btn.addEventListener('click', () => window.open(url, '_blank'));
     document.body.appendChild(btn);
   }
 
