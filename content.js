@@ -50,25 +50,15 @@
   }
 
   async function checkLuoguProblemExists(luoguUrl) {
-    // Luogu 的 SPA 首屏 HTML 里没有"出错啦"文本（那段是 Vue 运行时渲染的），
-    // 只能靠 HTTP 状态码判断：200 = 存在，404 = 不存在。
-    // 关键：luogu 有 302 反爬（第一次返回 302 到自己 + set-cookie C3VK），必须
-    // credentials:'include' 保留 cookie 走完重定向才能拿到真实 status；
-    // host_permissions 里已列入 https://www.luogu.com.cn/* 覆盖 CORS。
+    // 探测必须委托 background service worker：content script 的 fetch 受页面
+    // origin 的 CORS 限制（Chrome 85+ host_permissions 不再豁免 content script），
+    // luogu 不回 Access-Control-Allow-Origin，在这里直接 fetch 会抛 Failed to
+    // fetch 落进保守分支，按钮永远绿。状态码判定逻辑见 background.js。
     try {
-      const controller = new AbortController();
-      const to = setTimeout(() => controller.abort(), 10000);
-      const resp = await fetch(luoguUrl, {
-        method: 'GET',
-        signal: controller.signal,
-        credentials: 'include',
-        redirect: 'follow',
-      });
-      clearTimeout(to);
-      if (resp.status === 404) return false;
-      if (resp.ok) return true;
-      console.warn('[OJ-Redirect] luogu unexpected status:', resp.status, luoguUrl);
-      return true; // 保守：未知状态不误伤
+      const resp = await chrome.runtime.sendMessage({ type: 'probeLuogu', url: luoguUrl });
+      if (resp && typeof resp.exists === 'boolean') return resp.exists;
+      console.warn('[OJ-Redirect] luogu probe: bad response from background:', resp);
+      return true; // 保守：异常不误伤
     } catch (e) {
       console.warn('[OJ-Redirect] luogu probe failed:', e);
       return true;

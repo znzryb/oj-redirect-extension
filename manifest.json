@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OJ Redirect (VJudge / Luogu / clist)",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "在 CodeChef / QOJ / Codeforces 题目页添加跳转按钮：VJudge、Luogu、clist。",
   "author": "znzryb",
   "homepage_url": "https://github.com/znzryb/oj-redirect-extension",
