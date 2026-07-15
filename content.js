@@ -22,7 +22,7 @@
   const COLOR = {
     vjudge: '#28a745',
     luogu:  '#28a745',
-    clist:  '#4a90e2',
+    clist:  '#28a745',
     grayed: '#6c757d',
   };
 
