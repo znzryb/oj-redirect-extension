@@ -30,6 +30,10 @@ icons/           # 16/48/128 png
 
 新增运行时文件（例如加 `background.js` / `styles.css` / `popup.html`）时要**同时更新本清单**和 cp 命令。
 
+## Bug 记录惯例：`docs/bug/`
+
+每个排查过的 bug 记一个文件到 `docs/bug/<YYYY-MM-DD>-<slug>.md`，内容含：现象、根因、为什么之前的修复无效（如适用）、修法（带 commit hash）、验证、教训。修完非平凡 bug 后主动补一条，这是项目传统。
+
 ## 参考项目
 
 `third-party/OJBetter/`（beijixiaohu/OJBetter）已被 `.gitignore` 挡住。抄 clist / rating / CF-Better 相关实现时先看 `third-party/OJBetter/script/release/codeforces-better.user.js`。
