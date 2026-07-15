@@ -12,10 +12,25 @@ Codeforces Div. 2 单独场（不含 `Div. 3/4` / `+`）会自动尝试匹配到
 
 ## 安装（本地开发版 unpacked）
 
-1. 打开 `chrome://extensions`（或 Edge `edge://extensions`）
-2. 右上角打开「开发者模式 / Developer mode」
-3. 点「加载已解压的扩展程序 / Load unpacked」，选中本仓库根目录
-4. 打开任意 CodeChef / QOJ / Codeforces 题目页，右上应出现悬浮按钮
+> **加载路径不是这个仓库目录**，是用户级 `~/chrome-extensions/oj-redirect-extension/`（跟本机其它 unpacked 插件同放一处，规则见全局 CLAUDE.md「浏览器插件 build 后必须覆盖到用户级 Chrome extensions 目录」）。
+
+1. 把仓库产物同步到用户级目录：
+   ```bash
+   mkdir -p ~/chrome-extensions/oj-redirect-extension
+   cp -R manifest.json content.js icons ~/chrome-extensions/oj-redirect-extension/
+   ```
+2. 打开 `chrome://extensions`（或 Edge `edge://extensions`）
+3. 右上角打开「开发者模式 / Developer mode」
+4. 点「加载已解压的扩展程序 / Load unpacked」，选中 `~/chrome-extensions/oj-redirect-extension/`
+5. 打开任意 CodeChef / QOJ / Codeforces 题目页，右上应出现悬浮按钮
+
+## 修改仓库后同步（否则改动不生效）
+
+Chrome 加载的是 `~/chrome-extensions/...` 那份，不是仓库。改完仓库要覆盖：
+```bash
+cp -R manifest.json content.js icons ~/chrome-extensions/oj-redirect-extension/
+```
+然后在 `chrome://extensions` 里对本扩展点「重新加载」按钮。
 
 ## 从旧的 tampermonkey 脚本迁移
 
